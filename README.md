@@ -3,7 +3,8 @@ A web app to manage products, supporting all CRUD operations, built with React a
 
 # Function
 This app is used to manage products.
-![image](/public/assets/productlistafteredit.png)
+
+<kbd>![image](/public/assets/productlistafteredit.png)</kbd>
 
 # Setup Locally
 ## 1. RESTful API
