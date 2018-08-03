@@ -1,12 +1,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 
 const outputDirectory = "dist";
 
 module.exports = {
-  devtool: "source-map",
+  //devtool: "source-map",
 
   entry: ["./src/index"],
 
@@ -23,6 +24,13 @@ module.exports = {
       template: path.join(__dirname, "./src", "index.html"),
       favicon: path.join(__dirname, "./public", "assets", "favicon.ico")
     }),
+    new CopyWebpackPlugin([
+      {
+        from: "./public/_redirects",
+        to: "./_redirects",
+        toType: "file"
+      }
+    ]),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production"),
