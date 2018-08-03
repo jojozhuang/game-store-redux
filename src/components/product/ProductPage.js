@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AlertSimple from '../controls/AlertSimple';
-import ProductForm from './ProductForm';
+import React from "react";
+import PropTypes from "prop-types";
+import AlertSimple from "../controls/AlertSimple";
+import ProductForm from "./ProductForm";
 
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as productActions from '../../actions/productActions';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as productActions from "../../actions/productActions";
 
 class ProductPage extends React.Component {
   constructor(props) {
@@ -13,7 +13,12 @@ class ProductPage extends React.Component {
     this.state = {
       hasError: false,
       error: {},
-      product: {id: '0', productName: '', price: '', image: process.env.API_HOST+"/images/default.png"},
+      product: {
+        id: "0",
+        productName: "",
+        price: "",
+        image: process.env.API_URL + "/images/default.png"
+      },
       isnew: false
     };
 
@@ -22,29 +27,29 @@ class ProductPage extends React.Component {
     this.handleSave = this.handleSave.bind(this);
     this.handleError = this.handleError.bind(this);
   }
-  
+
   componentWillReceiveProps(nextProps) {
     //console.log('ProductPage.componentWillReceiveProps');
     //console.log(nextProps);
-    this.setState({hasError: nextProps.hasError});
-    this.setState({error: nextProps.error});
-    this.setState({product: nextProps.product});
-    this.setState({isnew: nextProps.isnew});
+    this.setState({ hasError: nextProps.hasError });
+    this.setState({ error: nextProps.error });
+    this.setState({ product: nextProps.product });
+    this.setState({ isnew: nextProps.isnew });
   }
 
   updateProductState(event) {
     const field = event.target.name;
     const product = this.state.product;
     product[field] = event.target.value;
-    return this.setState({product: product});
+    return this.setState({ product: product });
   }
 
   handleImageChange(image) {
     const product = this.state.product;
-    product['image'] = image;
-    return this.setState({product: this.state.product});
+    product["image"] = image;
+    return this.setState({ product: this.state.product });
   }
-  
+
   handleSave(event) {
     event.preventDefault();
     let product = this.state.product;
@@ -55,7 +60,7 @@ class ProductPage extends React.Component {
       this.props.productActions.updateProduct(product);
     }
   }
-  
+
   handleError(error) {
     //console.log(error);
     this.setState({ hasError: true });
@@ -65,25 +70,26 @@ class ProductPage extends React.Component {
   render() {
     //console.log('ProductPage.render');
     //console.log(this.state);
-    let alert = '';
+    let alert = "";
     if (this.state.hasError) {
-      alert = <AlertSimple error={this.state.error}/>;
+      alert = <AlertSimple error={this.state.error} />;
     }
-    let pageTitle = 'Edit Product';
+    let pageTitle = "Edit Product";
     if (this.state.isnew) {
-      pageTitle = 'Create New Product';
+      pageTitle = "Create New Product";
     }
-    return(
+    return (
       <div className="container">
         <h2>{pageTitle}</h2>
         {alert}
-        <ProductForm 
-          product={this.state.product} 
+        <ProductForm
+          product={this.state.product}
           isnew={this.state.isnew}
           onChange={this.updateProductState}
           onImageChange={this.handleImageChange}
           onSave={this.handleSave}
-          onError={this.handleError}/> 
+          onError={this.handleError}
+        />
       </div>
     );
   }
@@ -113,11 +119,17 @@ function mapStateToProps(state, ownProps) {
   let isnew = pId == null;
 
   // new product
-  let product = {id: '0', productName: '', price: '', image: process.env.API_HOST+"/images/default.png"};
-  if (pId) { //update product
+  let product = {
+    id: "0",
+    productName: "",
+    price: "",
+    image: process.env.API_URL + "/images/default.png"
+  };
+  if (pId) {
+    //update product
     // find product from list by id
     product = state.products.find(product => product.id == pId);
-  } 
+  }
 
   // error occurs
   let hasError = state.error !== null;
@@ -128,19 +140,29 @@ function mapStateToProps(state, ownProps) {
   } else if (product == null) {
     hasError = true;
     error = new Error("No such product: " + pId);
-    product = {id: '0', productName: '', price: '', image: process.env.API_HOST+"/images/default.png"};
+    product = {
+      id: "0",
+      productName: "",
+      price: "",
+      image: process.env.API_URL + "/images/default.png"
+    };
   }
 
   if (product == null) {
     hasError = false;
     error = null;
-    product = {id: '0', productName: '', price: '', image: process.env.API_HOST+"/images/default.png"};
+    product = {
+      id: "0",
+      productName: "",
+      price: "",
+      image: process.env.API_URL + "/images/default.png"
+    };
   }
-  
+
   // refresh if image is uploaded, product info needs to be preserved
-  if (state.file.product) { 
+  if (state.file.product) {
     product = state.file.product;
-  } 
+  }
 
   return {
     hasError: hasError,
@@ -148,7 +170,7 @@ function mapStateToProps(state, ownProps) {
     product: product,
     isnew: isnew
   };
-} 
+}
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -156,4 +178,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);  
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

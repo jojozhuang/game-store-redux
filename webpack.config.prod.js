@@ -1,47 +1,56 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const webpack = require("webpack");
 
-export default {
-  devtool: 'source-map',
+const outputDirectory = "dist";
 
-  entry: [
-    './src/index'
-  ],
+module.exports = {
+  devtool: "source-map",
+
+  entry: ["./src/index"],
 
   output: {
-    path: path.join(__dirname, 'public'),
-    filename: 'bundle.js',
-    publicPath: '/public/'
+    path: path.join(__dirname, outputDirectory),
+    filename: "bundle.js",
+    publicPath: "/public/"
   },
 
   plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false
-      }
+    new CleanWebpackPlugin([outputDirectory]),
+    new HtmlWebpackPlugin({
+      title: "Online Code Editor",
+      template: path.join(__dirname, "./src", "index.html"),
+      favicon: path.join(__dirname, "./public", "assets", "favicon.ico")
     }),
     new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
-        'API_HOST': JSON.stringify('https://catbook-api.herokuapp.com')
+      "process.env": {
+        NODE_ENV: JSON.stringify("production"),
+        API_URL: JSON.stringify("https://gamestore-api.azurewebsites.net")
       }
     })
   ],
 
   module: {
-    loaders: [
-      { test: /\.js?$/,
-        loader: 'babel',
-        exclude: /node_modules/ },
-      { test: /\.scss?$/,
-        loader: 'style!css!sass',
-        include: path.join(__dirname, 'src', 'styles') },
-      { test: /\.png$/,
-        loader: 'file' },
-      { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: 'file'}
+    rules: [
+      {
+        test: /\.js?$/,
+        loader: "babel-loader",
+        exclude: /node_modules/
+      },
+      {
+        test: /\.scss?$/,
+        loader: "style!css!sass",
+        include: path.join(__dirname, "src", "styles")
+      },
+      {
+        test: /\.png$/,
+        loader: "file"
+      },
+      {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: "file"
+      }
     ]
   }
 };

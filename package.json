@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel open:src lint:watch",
+    "build": "NODE_ENV=production webpack --env production --config ./webpack.config.prod.js",
     "open:src": "babel-node tools/server.js",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["react"],
+  "keywords": [
+    "react"
+  ],
   "author": {
     "name": "Rong Zhuang",
     "email": "jojozhuang@gmail.com"
@@ -35,15 +38,18 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
+    "clean-webpack-plugin": "^0.1.19",
     "eslint": "^4.13.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-react": "^7.5.1",
     "eslint-watch": "^3.1.3",
     "eventsource-polyfill": "^0.9.6",
+    "html-webpack-plugin": "^3.2.0",
     "open": "0.0.5",
     "serve-favicon": "^2.4.5",
-    "webpack": "^3.10.0",
-    "webpack-dev-middleware": "^2.0.1",
-    "webpack-hot-middleware": "^2.21.0"
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-hot-middleware": "^2.22.3"
   }
 }
