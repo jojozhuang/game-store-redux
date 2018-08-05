@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel open:src lint:watch",
-    "build":
-      "NODE_ENV=production webpack --env production --config ./webpack.config.prod.js",
+    "build": "NODE_ENV=production webpack --env production --config ./webpack.config.prod.js",
     "open:src": "babel-node tools/server.js",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["react"],
+  "keywords": [
+    "react"
+  ],
   "author": {
     "name": "Rong Zhuang",
     "email": "jojozhuang@gmail.com"
