@@ -31,6 +31,13 @@ module.exports = {
         toType: "file"
       }
     ]),
+    new CopyWebpackPlugin([
+      {
+        from: "./public/web.config",
+        to: "./web.config",
+        toType: "file"
+      }
+    ]),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production"),

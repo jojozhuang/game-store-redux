@@ -1,10 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {ControlLabel, FormControl, Button, Image, Label} from 'react-bootstrap';
+import React from "react";
+import PropTypes from "prop-types";
+import {
+  ControlLabel,
+  FormControl,
+  Button,
+  Image,
+  Label
+} from "react-bootstrap";
 
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import * as fileActions from '../../actions/fileActions';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as fileActions from "../../actions/fileActions";
 
 class ImageUpload extends React.Component {
   constructor(props) {
@@ -25,8 +31,8 @@ class ImageUpload extends React.Component {
 
   handleFileChange(event) {
     const file = event.target.files[0];
-    this.setState({filename: file.name});
-    this.setState({file: file});
+    this.setState({ filename: file.name });
+    this.setState({ file: file });
   }
 
   handleFileUpload(event) {
@@ -35,14 +41,32 @@ class ImageUpload extends React.Component {
 
   render() {
     //console.log('ImageUpload.render');
-    return(
+    return (
       <div>
-        <Image src={this.props.image} thumbnail width="80" height="80" />&nbsp;
-        <ControlLabel className="btn btn-success" htmlFor="fileSelector">
-          <FormControl id="fileSelector" type="file" style={{display: 'none'}} onChange={this.handleFileChange}/>Choose Image
-        </ControlLabel>&nbsp;
-        <Label bsStyle="info">{this.state.filename}</Label>&nbsp;
-        <Button bsStyle="primary" type="button" onClick={this.handleFileUpload}>Upload</Button>
+        <Image src={this.props.image} thumbnail width="80" height="80" />
+        <ControlLabel
+          className="btn btn-success"
+          htmlFor="fileSelector"
+          style={{ marginLeft: "5px" }}
+        >
+          <FormControl
+            id="fileSelector"
+            type="file"
+            style={{ display: "none" }}
+            onChange={this.handleFileChange}
+          />Choose Image
+        </ControlLabel>
+        <Label bsStyle="info" style={{ marginLeft: "5px" }}>
+          {this.state.filename}
+        </Label>
+        <Button
+          bsStyle="primary"
+          type="button"
+          onClick={this.handleFileUpload}
+          style={{ marginLeft: "5px" }}
+        >
+          Upload
+        </Button>
       </div>
     );
   }
@@ -64,11 +88,11 @@ function mapStateToProps(state, ownProps) {
   if (state.file.message) {
     image = state.file.message;
   }
-  
+
   return {
     image: image
   };
-} 
+}
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -1,5 +1,5 @@
 {
-  "name": "game-store-react",
+  "name": "game-store-redux",
   "version": "1.0.0",
   "description": "Game Store built with ReactJS",
   "main": "index.js",

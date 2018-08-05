@@ -7,7 +7,11 @@ This app is used to manage products.
 <kbd>![image](/public/assets/productlistafteredit.png)</kbd>
 
 # Demo
-The [Live Demo](https://game-store-redux.netlify.com/) is hosted on Netlify.
+Two available demos:
+* `Live Demo on Netlify:` <a href="https://game-store-redux.netlify.com/" target="\_blank">https://game-store-redux.netlify.com/</a>
+* `Live Demo on Azure:` <a href="https://game-store-redux.azurewebsites.net/" target="\_blank">https://game-store-redux.azurewebsites.net/</a>
+
+*Note: The demo websites may be slow when you access them for the first time. Be patient!*
 
 # Setup Locally
 ## 1. RESTful API
