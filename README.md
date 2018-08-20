@@ -25,8 +25,8 @@ Setup server to host RESTful API with Spring Boot or ASP.NET Core, see below.
 
 ## 2. React App
 ```bash
-git clone https://github.com/jojozhuang/game-store-reactredux.git
-cd game-store-reactredux
+git clone https://github.com/jojozhuang/game-store-redux.git
+cd game-store-redux
 npm install
 npm start
 ```
