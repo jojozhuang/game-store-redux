@@ -4,7 +4,9 @@
   "description": "Game Store built with ReactJS",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all --parallel open:src lint:watch",
+    "dev": "npm-run-all --parallel open:src lint:watch",
+    "start": "node server.js",
+    "postinstall": "npm run build",
     "build": "NODE_ENV=production webpack --env production --config ./webpack.config.prod.js",
     "open:src": "babel-node tools/server.js",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
@@ -53,5 +55,9 @@
     "webpack-hot-middleware": "^2.25.0",
     "lodash": "^4.17.11",
     "fstream": "1.0.12"
+  },
+  "engines": {
+    "node": "9.4.0",
+    "npm": "6.9.0"
   }
 }
