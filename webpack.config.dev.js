@@ -19,7 +19,7 @@ export default {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
         API_URL: JSON.stringify("http://localhost:8080")
@@ -27,7 +27,7 @@ export default {
     })
   ],
   module: {
-    rules: [
+    loaders: [
       {
         test: /\.js$/,
         include: path.join(__dirname, "src"),

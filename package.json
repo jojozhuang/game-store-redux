@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "NODE_ENV=production webpack --env production --config ./webpack.config.prod.js",
+    "build": "NODE_ENV=production webpack --env production",
     "dev": "babel-node tools/server.js",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
@@ -24,6 +24,7 @@
     "babel-polyfill": "^6.26.0",
     "express": "^4.17.1",
     "history": "^4.9.0",
+    "mini-css-extract-plugin": "^2.1.0",
     "react": "^16.8.6",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.8.6",
@@ -51,12 +52,14 @@
     "fstream": "1.0.12",
     "html-webpack-plugin": "^5.3.2",
     "lodash": "^4.17.21",
+    "purgecss-webpack-plugin": "^4.0.3",
     "serve-favicon": "^2.5.0",
     "webpack": "^5.44.0",
     "webpack-cli": "^4.7.2",
     "webpack-dev-middleware": "^5.0.0",
     "webpack-dev-server": "^3.11.2",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-merge": "^4.2.1"
   },
   "engines": {
     "node": "14.16.1",
