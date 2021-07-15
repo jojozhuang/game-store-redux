@@ -20,24 +20,30 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
-      title: "Online Code Editor",
+      title: "Game Store Redux",
       template: path.join(__dirname, "./src", "index.html"),
       favicon: path.join(__dirname, "./public", "assets", "favicon.ico")
     }),
-    new CopyWebpackPlugin([
+    new CopyWebpackPlugin(
       {
-        from: "./public/_redirects",
-        to: "./_redirects",
-        toType: "file"
-      }
-    ]),
-    new CopyWebpackPlugin([
+        patterns:[
+          {
+            from: "./public/_redirects",
+            to: "./_redirects",
+            toType: "file"
+          }
+        ]
+      }),
+    new CopyWebpackPlugin(
       {
-        from: "./public/web.config",
-        to: "./web.config",
-        toType: "file"
-      }
-    ]),
+        patterns:[
+          {
+            from: "./public/web.config",
+            to: "./web.config",
+            toType: "file"
+          }
+        ]
+      }),
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production"),
@@ -50,21 +56,21 @@ module.exports = {
     rules: [
       {
         test: /\.js?$/,
-        loader: "babel-loader",
+        use: ["babel-loader"],
         exclude: /node_modules/
       },
       {
         test: /\.scss?$/,
-        loader: "style!css!sass",
+        use: ["style!css!sass"],
         include: path.join(__dirname, "src", "styles")
       },
       {
         test: /\.png$/,
-        loader: "file"
+        use: ["file"]
       },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        loader: "file"
+        use: ["file"]
       }
     ]
   }
