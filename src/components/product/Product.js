@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import * as productActions from "../../actions/productActions";
 
-class ProductPage extends React.Component {
+class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,9 +17,9 @@ class ProductPage extends React.Component {
         id: "0",
         productName: "",
         price: "",
-        image: process.env.API_URL + "/images/default.png"
+        image: process.env.API_URL + "/images/default.png",
       },
-      isnew: false
+      isnew: false,
     };
 
     this.updateProductState = this.updateProductState.bind(this);
@@ -29,7 +29,6 @@ class ProductPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    //console.log('ProductPage.componentWillReceiveProps');
     //console.log(nextProps);
     this.setState({ hasError: nextProps.hasError });
     this.setState({ error: nextProps.error });
@@ -68,7 +67,6 @@ class ProductPage extends React.Component {
   }
 
   render() {
-    //console.log('ProductPage.render');
     //console.log(this.state);
     let alert = "";
     if (this.state.hasError) {
@@ -95,23 +93,22 @@ class ProductPage extends React.Component {
   }
 }
 
-ProductPage.propTypes = {
+Product.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
   hasError: PropTypes.bool.isRequired,
   error: PropTypes.object,
   product: PropTypes.object.isRequired,
   isnew: PropTypes.bool.isRequired,
-  productActions: PropTypes.object.isRequired
+  productActions: PropTypes.object.isRequired,
 };
 
 function getProductById(products, id) {
-  let product = products.find(product => product.id == id);
+  let product = products.find((product) => product.id == id);
   return Object.assign({}, product);
 }
 
 function mapStateToProps(state, ownProps) {
-  //console.log('ProductPage.mapStateToProps');
   //console.log(state);
   //console.log(ownProps);
 
@@ -123,12 +120,12 @@ function mapStateToProps(state, ownProps) {
     id: "0",
     productName: "",
     price: "",
-    image: process.env.API_URL + "/images/default.png"
+    image: process.env.API_URL + "/images/default.png",
   };
   if (pId) {
     //update product
     // find product from list by id
-    product = state.products.find(product => product.id == pId);
+    product = state.products.find((product) => product.id == pId);
   }
 
   // error occurs
@@ -144,7 +141,7 @@ function mapStateToProps(state, ownProps) {
       id: "0",
       productName: "",
       price: "",
-      image: process.env.API_URL + "/images/default.png"
+      image: process.env.API_URL + "/images/default.png",
     };
   }
 
@@ -155,7 +152,7 @@ function mapStateToProps(state, ownProps) {
       id: "0",
       productName: "",
       price: "",
-      image: process.env.API_URL + "/images/default.png"
+      image: process.env.API_URL + "/images/default.png",
     };
   }
 
@@ -168,14 +165,14 @@ function mapStateToProps(state, ownProps) {
     hasError: hasError,
     error: error,
     product: product,
-    isnew: isnew
+    isnew: isnew,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    productActions: bindActionCreators(productActions, dispatch)
+    productActions: bindActionCreators(productActions, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
